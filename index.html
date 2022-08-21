@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List Webify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<main id="todolist">
+  <h1 style="font-weight:bold">
+    To-Do List
+  </h1>
+  <template v-if="todo.length">
+    <transition-group name="todolist" tag="ul">
+      <li v-for="item in todoByStatus" v-bind:class="item.done ? 'done' : ''" v-bind:key="item.id">
+        <span class="label">{{item.label}}</span>
+        <div class="actions">
+          <button class="btn-picto" type="button" v-on:click="deleteItemFromList(item)" aria-label="Delete" title="Delete">
+            <i aria-hidden="true" class="material-icons">delete</i>
+          </button>
+        </div>
+      </li>
+    </transition-group>
+  </template>
+  <p v-else class="emptylist">To-Do list is empty.</p>
+
+  <form name="newform" v-on:submit.prevent="addItem">
+    <label for="newitem">Add to the to-do list</label>
+    <input type="text" name="newitem" id="newitem" v-model="newitem">
+    <button type="submit">Add work</button>
+  </form>
+</main>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
